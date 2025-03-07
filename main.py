@@ -144,6 +144,7 @@ incident_timelines_fig.update_yaxes(categoryorder="total ascending")
 
 
 app.layout = [
+    html.H4(children="Please wait a bit to load the data..."),
     html.Li(
         children="Risk Assessment: Visualize the organization's current cyber risk posture, highlighting areas of high vulnerability."
     ),
