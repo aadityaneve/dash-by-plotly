@@ -15,7 +15,7 @@ app = Dash()
 # 3. Compliance Gauges: Incorporate gauge charts to represent the current compliance status with various cybersecurity frameworks.
 # 4. Incident Timelines: Develop timelines that detail the sequence and impact of security incidents.
 
-# Risk Heatmaps
+# Risk Heatmapss
 risk_heatmap_data = {
     "Department": ["Finance", "HR", "IT", "Operations", "Sales"],
     "Phishing": [7, 5, 9, 6, 4],
