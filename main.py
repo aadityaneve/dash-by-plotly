@@ -1,7 +1,8 @@
 from dash import Dash, html, dcc
 import pandas as pd
 import plotly.express as px
-import numpy as np
+
+# import numpy as np
 
 # dash_daq is basically a wrapper around dash_core_components
 # it provides a collection of pre-built components that can be used to create interactive dashboards
@@ -39,14 +40,36 @@ risk_heatmap_data_frame_fig.update_xaxes(side="top")
 
 # Trend Graph
 # Generate a date range for 1 year
+import random
+import math
+
+
+def poisson_random_variable(lam):
+    L = math.exp(-lam)
+    k = 0
+    p = 1
+    while p > L:
+        k += 1
+        p *= random.random()
+    return k - 1
+
+
 date_range = pd.date_range(start="2024-01-01", end="2024-12-31", freq="ME")
+# trend_graph_data = {
+#     "Date": date_range,
+#     "Phishing": np.random.poisson(lam=5, size=len(date_range)),
+#     "Malware": np.random.poisson(lam=3, size=len(date_range)),
+#     "Ransomware": np.random.poisson(lam=2, size=len(date_range)),
+#     "Insider Threat": np.random.poisson(lam=1, size=len(date_range)),
+#     "DDoS": np.random.poisson(lam=4, size=len(date_range)),
+# }
 trend_graph_data = {
     "Date": date_range,
-    "Phishing": np.random.poisson(lam=5, size=len(date_range)),
-    "Malware": np.random.poisson(lam=3, size=len(date_range)),
-    "Ransomware": np.random.poisson(lam=2, size=len(date_range)),
-    "Insider Threat": np.random.poisson(lam=1, size=len(date_range)),
-    "DDoS": np.random.poisson(lam=4, size=len(date_range)),
+    "Phishing": [poisson_random_variable(5) for _ in range(len(date_range))],
+    "Malware": [poisson_random_variable(3) for _ in range(len(date_range))],
+    "Ransomware": [poisson_random_variable(2) for _ in range(len(date_range))],
+    "Insider Threat": [poisson_random_variable(1) for _ in range(len(date_range))],
+    "DDoS": [poisson_random_variable(4) for _ in range(len(date_range))],
 }
 trend_graph_data = pd.DataFrame(trend_graph_data)
 
@@ -55,7 +78,7 @@ trend_graph_fig = px.line(
     x="Date",
     y=["Phishing", "Malware", "Ransomware", "Insider Threat", "DDoS"],
     labels={"value": "Number of Incidents", "variable": "Threat Type"},
-    title="Monthly Cyber Threat Incidents Over 2024",
+    title="Trend Graph of Monthly Cyber Threat Incidents Over 2024",
 )
 trend_graph_fig.update_layout(xaxis_title="Month", yaxis_title="Number of Incidents")
 
