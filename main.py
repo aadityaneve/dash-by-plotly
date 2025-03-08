@@ -152,6 +152,7 @@ custom_data_frame_fig = px.bar(
     color="Family",
     labels={"Category": "Category", "Family": "Number of Families"},
     log_y=True,
+    title="Number of Families Affected by Malware Category ( in year 2020)",
 )
 
 
@@ -298,29 +299,29 @@ app.layout = [
     html.Hr(),
     html.Div(
         children=".",
-        style={"margin-top": "70px", "margin-bottom": "70px"},
-    ),
-    html.Li(
-        children="Risk Assessment: Visualize the organization's current cyber risk posture, highlighting areas of high vulnerability."
-    ),
-    html.Li(
-        children="Threat Monitoring: Display real-time data on emerging threats and incidents."
-    ),
-    html.Li(
-        children="Compliance Tracking: Monitor adherence to cybersecurity standards and regulations."
-    ),
-    html.Li(
-        children="Incident Analysis: Provide detailed insights into past security incidents to inform future prevention strategies."
+        style={"margin-top": "30px", "margin-bottom": "30px"},
     ),
     html.H4(children="Note: The data shown below is Dummy Data."),
     html.Hr(),
+    html.Li(
+        children="Risk Assessment: Visualize the organization's current cyber risk posture, highlighting areas of high vulnerability."
+    ),
     dcc.Graph(figure=risk_heatmap_data_frame_fig),
     html.Hr(),
+    html.Li(
+        children="Threat Monitoring: Display real-time data on emerging threats and incidents."
+    ),
     dcc.Graph(figure=trend_graph_fig),
     html.Hr(),
     # dcc.Graph(figure=compliance_guages_data_fig),
+    html.Li(
+        children="Compliance Tracking: Monitor adherence to cybersecurity standards and regulations."
+    ),
     compliance_guages_data_fig,
     html.Hr(),
+    html.Li(
+        children="Incident Analysis: Provide detailed insights into past security incidents to inform future prevention strategies."
+    ),
     dcc.Graph(figure=incident_timelines_fig),
 ]
 
