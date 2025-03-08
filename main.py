@@ -1,3 +1,4 @@
+import os
 from dash import Dash, html, dcc
 import pandas as pd
 import plotly.express as px
@@ -11,10 +12,11 @@ import dash_daq as daq
 
 app = Dash()
 
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
 ## Adware Data
-adware_data_frame = pd.read_csv(
-    "cyber-data/Adware_after_reboot_Cat.csv", usecols=["Category", "Family"]
-)
+adware_csv_path = os.path.join(base_dir, "cyber-data", "Adware_after_reboot_Cat.csv")
+adware_data_frame = pd.read_csv(adware_csv_path, usecols=["Category", "Family"])
 adware_data = {
     # "Category": adware_data_frame["Category"].value_counts(),
     "Category": adware_data_frame["Category"].max(),
@@ -30,9 +32,10 @@ adware_custom_data_frame = pd.DataFrame(adware_data, index=[0])
 
 
 ## Backdoor Data
-backdoor_data_frame = pd.read_csv(
-    "cyber-data/Backdoor_after_reboot_Cat.csv", usecols=["Category", "Family"]
+backdoor_csv_path = os.path.join(
+    base_dir, "cyber-data", "Backdoor_after_reboot_Cat.csv"
 )
+backdoor_data_frame = pd.read_csv(backdoor_csv_path, usecols=["Category", "Family"])
 backdoor_data = {
     # "Category": backdoor_data_frame["Category"].value_counts(),
     "Category": backdoor_data_frame["Category"].max(),
@@ -42,8 +45,11 @@ backdoor_custom_data_frame = pd.DataFrame(backdoor_data, index=[1])
 
 
 ## File Infector Data
+file_infector_csv_path = os.path.join(
+    base_dir, "cyber-data", "FileInfector_after_reboot_Cat.csv"
+)
 file_infector_data_frame = pd.read_csv(
-    "cyber-data/FileInfector_after_reboot_Cat.csv", usecols=["Category", "Family"]
+    file_infector_csv_path, usecols=["Category", "Family"]
 )
 file_infector_data = {
     # "Category": file_infector_data_frame["Category"].value_counts(),
@@ -54,9 +60,8 @@ file_infector_custom_data_frame = pd.DataFrame(file_infector_data, index=[2])
 
 ## PUA Data
 ## PUA full form is "Personal User Agent"
-pua_data_frame = pd.read_csv(
-    "cyber-data/PUA_after_reboot_Cat.csv", usecols=["Category", "Family"]
-)
+pua_csv_path = os.path.join(base_dir, "cyber-data", "PUA_after_reboot_Cat.csv")
+pua_data_frame = pd.read_csv(pua_csv_path, usecols=["Category", "Family"])
 pua_data = {
     # "Category": pua_data_frame["Category"].value_counts(),
     "Category": pua_data_frame["Category"].max(),
@@ -65,9 +70,10 @@ pua_data = {
 pua_custom_data_frame = pd.DataFrame(pua_data, index=[3])
 
 ## Ransomware Data
-ransomware_data_frame = pd.read_csv(
-    "cyber-data/Ransomware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+ransomware_csv_path = os.path.join(
+    base_dir, "cyber-data", "Ransomware_after_reboot_Cat.csv"
 )
+ransomware_data_frame = pd.read_csv(ransomware_csv_path, usecols=["Category", "Family"])
 ransomware_data = {
     # "Category": ransomware_data_frame["Category"].value_counts(),
     "Category": ransomware_data_frame["Category"].max(),
@@ -76,9 +82,10 @@ ransomware_data = {
 ransomware_custom_data_frame = pd.DataFrame(ransomware_data, index=[4])
 
 ## Riskware
-riskware_data_frame = pd.read_csv(
-    "cyber-data/Riskware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+riskware_csv_path = os.path.join(
+    base_dir, "cyber-data", "Riskware_after_reboot_Cat.csv"
 )
+riskware_data_frame = pd.read_csv(riskware_csv_path, usecols=["Category", "Family"])
 riskware_data = {
     # "Category": riskware_data_frame["Category"].value_counts(),
     "Category": riskware_data_frame["Category"].max(),
@@ -87,9 +94,10 @@ riskware_data = {
 riskware_custom_data_frame = pd.DataFrame(riskware_data, index=[5])
 
 ## Scareware Data
-scareware_data_frame = pd.read_csv(
-    "cyber-data/Scareware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+scareware_csv_path = os.path.join(
+    base_dir, "cyber-data", "Scareware_after_reboot_Cat.csv"
 )
+scareware_data_frame = pd.read_csv(scareware_csv_path, usecols=["Category", "Family"])
 scareware_data = {
     # "Category": scareware_data_frame["Category"].value_counts(),
     "Category": scareware_data_frame["Category"].max(),
@@ -98,9 +106,8 @@ scareware_data = {
 scareware_custom_data_frame = pd.DataFrame(scareware_data, index=[6])
 
 ## Torjan Data
-torjan_data_frame = pd.read_csv(
-    "cyber-data/Trojan_after_reboot_Cat.csv", usecols=["Category", "Family"]
-)
+torjan_csv_path = os.path.join(base_dir, "cyber-data", "Trojan_after_reboot_Cat.csv")
+torjan_data_frame = pd.read_csv(torjan_csv_path, usecols=["Category", "Family"])
 torjan_data = {
     # "Category": torjan_data_frame["Category"].value_counts(),
     "Category": torjan_data_frame["Category"].max(),
@@ -109,9 +116,10 @@ torjan_data = {
 torjan_custom_data_frame = pd.DataFrame(torjan_data, index=[7])
 
 ## Zero Day Data
-zero_day_data_frame = pd.read_csv(
-    "cyber-data/Zero_Day_after_reboot_Cat.csv", usecols=["Category", "Family"]
+zero_day_csv_path = os.path.join(
+    base_dir, "cyber-data", "Zero_Day_after_reboot_Cat.csv"
 )
+zero_day_data_frame = pd.read_csv(zero_day_csv_path, usecols=["Category", "Family"])
 zero_day_data = {
     # "Category": zero_day_data_frame["Category"].value_counts(),
     "Category": zero_day_data_frame["Category"].max(),
