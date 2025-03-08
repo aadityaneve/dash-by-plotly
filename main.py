@@ -21,10 +21,10 @@ adware_data = {
     "Family": adware_data_frame["Family"].value_counts().count(),
 }
 adware_custom_data_frame = pd.DataFrame(adware_data, index=[0])
-print(adware_data_frame.head())
+# print(adware_data_frame.head())
 # print(adware_data_frame.columns)
 
-print(adware_data_frame["Category"].max())
+# print(adware_data_frame["Category"].max())
 # print(adware_data_frame["Category"].value_counts())
 # print(adware_data_frame["Family"].value_counts().count())
 
@@ -133,7 +133,7 @@ custom_data_frame = pd.concat(
         zero_day_custom_data_frame,
     ]
 )
-print(custom_data_frame)
+# print(custom_data_frame)
 
 # Plot Merged Data
 custom_data_frame_fig = px.bar(
