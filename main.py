@@ -11,6 +11,142 @@ import dash_daq as daq
 
 app = Dash()
 
+## Adware Data
+adware_data_frame = pd.read_csv(
+    "cyber-data/Adware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+adware_data = {
+    # "Category": adware_data_frame["Category"].value_counts(),
+    "Category": adware_data_frame["Category"].max(),
+    "Family": adware_data_frame["Family"].value_counts().count(),
+}
+adware_custom_data_frame = pd.DataFrame(adware_data, index=[0])
+print(adware_data_frame.head())
+# print(adware_data_frame.columns)
+
+print(adware_data_frame["Category"].max())
+# print(adware_data_frame["Category"].value_counts())
+# print(adware_data_frame["Family"].value_counts().count())
+
+
+## Backdoor Data
+backdoor_data_frame = pd.read_csv(
+    "cyber-data/Backdoor_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+backdoor_data = {
+    # "Category": backdoor_data_frame["Category"].value_counts(),
+    "Category": backdoor_data_frame["Category"].max(),
+    "Family": backdoor_data_frame["Family"].value_counts().count(),
+}
+backdoor_custom_data_frame = pd.DataFrame(backdoor_data, index=[1])
+
+
+## File Infector Data
+file_infector_data_frame = pd.read_csv(
+    "cyber-data/FileInfector_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+file_infector_data = {
+    # "Category": file_infector_data_frame["Category"].value_counts(),
+    "Category": file_infector_data_frame["Category"].max(),
+    "Family": file_infector_data_frame["Family"].value_counts().count(),
+}
+file_infector_custom_data_frame = pd.DataFrame(file_infector_data, index=[2])
+
+## PUA Data
+## PUA full form is "Personal User Agent"
+pua_data_frame = pd.read_csv(
+    "cyber-data/PUA_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+pua_data = {
+    # "Category": pua_data_frame["Category"].value_counts(),
+    "Category": pua_data_frame["Category"].max(),
+    "Family": pua_data_frame["Family"].value_counts().count(),
+}
+pua_custom_data_frame = pd.DataFrame(pua_data, index=[3])
+
+## Ransomware Data
+ransomware_data_frame = pd.read_csv(
+    "cyber-data/Ransomware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+ransomware_data = {
+    # "Category": ransomware_data_frame["Category"].value_counts(),
+    "Category": ransomware_data_frame["Category"].max(),
+    "Family": ransomware_data_frame["Family"].value_counts().count(),
+}
+ransomware_custom_data_frame = pd.DataFrame(ransomware_data, index=[4])
+
+## Riskware
+riskware_data_frame = pd.read_csv(
+    "cyber-data/Riskware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+riskware_data = {
+    # "Category": riskware_data_frame["Category"].value_counts(),
+    "Category": riskware_data_frame["Category"].max(),
+    "Family": riskware_data_frame["Family"].value_counts().count(),
+}
+riskware_custom_data_frame = pd.DataFrame(riskware_data, index=[5])
+
+## Scareware Data
+scareware_data_frame = pd.read_csv(
+    "cyber-data/Scareware_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+scareware_data = {
+    # "Category": scareware_data_frame["Category"].value_counts(),
+    "Category": scareware_data_frame["Category"].max(),
+    "Family": scareware_data_frame["Family"].value_counts().count(),
+}
+scareware_custom_data_frame = pd.DataFrame(scareware_data, index=[6])
+
+## Torjan Data
+torjan_data_frame = pd.read_csv(
+    "cyber-data/Trojan_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+torjan_data = {
+    # "Category": torjan_data_frame["Category"].value_counts(),
+    "Category": torjan_data_frame["Category"].max(),
+    "Family": torjan_data_frame["Family"].value_counts().count(),
+}
+torjan_custom_data_frame = pd.DataFrame(torjan_data, index=[7])
+
+## Zero Day Data
+zero_day_data_frame = pd.read_csv(
+    "cyber-data/Zero_Day_after_reboot_Cat.csv", usecols=["Category", "Family"]
+)
+zero_day_data = {
+    # "Category": zero_day_data_frame["Category"].value_counts(),
+    "Category": zero_day_data_frame["Category"].max(),
+    "Family": zero_day_data_frame["Family"].value_counts().count(),
+}
+zero_day_custom_data_frame = pd.DataFrame(zero_day_data, index=[8])
+
+# Concatenate Data
+custom_data_frame = pd.concat(
+    [
+        adware_custom_data_frame,
+        backdoor_custom_data_frame,
+        file_infector_custom_data_frame,
+        pua_custom_data_frame,
+        ransomware_custom_data_frame,
+        riskware_custom_data_frame,
+        scareware_custom_data_frame,
+        torjan_custom_data_frame,
+        zero_day_custom_data_frame,
+    ]
+)
+print(custom_data_frame)
+
+# Plot Merged Data
+custom_data_frame_fig = px.bar(
+    custom_data_frame,
+    x="Category",
+    y="Family",
+    orientation="v",
+    color="Family",
+    labels={"Category": "Category", "Family": "Number of Families"},
+    log_y=True,
+)
+
+
 # 1. Risk Heatmaps: Use color-coded maps to identify high-risk areas within the organization's infrastructure.
 # 2. Trend Graphs: Implement interactive line charts to showcase the frequency and types of cyber threats over time.
 # 3. Compliance Gauges: Incorporate gauge charts to represent the current compliance status with various cybersecurity frameworks.
@@ -145,6 +281,18 @@ incident_timelines_fig.update_yaxes(categoryorder="total ascending")
 
 app.layout = [
     html.H4(children="Please wait a bit to load the data..."),
+    html.H4(children="Note: This is Dummy Data."),
+    html.Hr(),
+    html.A(
+        children="Click here for the original data",
+        href="https://www.unb.ca/cic/datasets/andmal2020.html",
+    ),
+    dcc.Graph(figure=custom_data_frame_fig),
+    html.Hr(),
+    html.Div(
+        children=".",
+        style={"margin-top": "70px", "margin-bottom": "70px"},
+    ),
     html.Li(
         children="Risk Assessment: Visualize the organization's current cyber risk posture, highlighting areas of high vulnerability."
     ),
@@ -157,7 +305,6 @@ app.layout = [
     html.Li(
         children="Incident Analysis: Provide detailed insights into past security incidents to inform future prevention strategies."
     ),
-    html.H4(children="Note: This is Dummy Data."),
     html.Hr(),
     dcc.Graph(figure=risk_heatmap_data_frame_fig),
     html.Hr(),
