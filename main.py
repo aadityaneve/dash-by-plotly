@@ -289,7 +289,6 @@ incident_timelines_fig.update_yaxes(categoryorder="total ascending")
 
 app.layout = [
     html.H4(children="Please wait a bit to load the data..."),
-    html.H4(children="Note: This is Dummy Data."),
     html.Hr(),
     html.A(
         children="Click here for the original data",
@@ -313,6 +312,7 @@ app.layout = [
     html.Li(
         children="Incident Analysis: Provide detailed insights into past security incidents to inform future prevention strategies."
     ),
+    html.H4(children="Note: The data shown below is Dummy Data."),
     html.Hr(),
     dcc.Graph(figure=risk_heatmap_data_frame_fig),
     html.Hr(),
